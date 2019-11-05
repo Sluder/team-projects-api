@@ -28,23 +28,34 @@ class ApiController extends Controller
     }
 
     /**
-     * Get current mode fan is in
+     * Get current set temperature ranges
      */
-    public function getMode()
+    public function getRanges()
     {
+        $ranges = config('team-projects.ranges');
+
         return [
-            'mode' => config('team-projects.mode')
+            'low' => [
+                'from' => explode('-', $ranges[0])[0],
+                'to' => explode('-', $ranges[0])[1]
+            ],
+            'medium' => [
+                'from' => explode('-', $ranges[1])[0],
+                'to' => explode('-', $ranges[1])[1]
+            ],
+            'high' => [
+                'from' => explode('-', $ranges[2])[0],
+                'to' => explode('-', $ranges[2])[1]
+            ]
         ];
     }
 
     /**
-     * Get current mode fan is in
-     *
-     * @param $mode: Automatic or standard
+     * Set temperature ranges
      */
-    public function setMode($mode)
+    public function setRanges()
     {
-        Config::set('team-projects.mode', $mode);
+
     }
 
     /**
