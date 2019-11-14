@@ -75,6 +75,8 @@ class ApiController extends Controller
      */
     public function setSwitch($switch_to)
     {
-        Config::set('team-projects.mode', $switch_to);
+        $json = file_get_contents('config.json');
+        $json['switch'] = $switch_to;
+        file_put_contents('config.json', $json);
     }
 }
