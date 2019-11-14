@@ -10,11 +10,11 @@ class ApiController extends Controller
      * Get last recorded temp
      */
     public function getLastRecorded() {
-        $temp = config('team-projects.last-recorded');
+        $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
 
         return [
-            'F' => number_format($temp, 2),
-            'C' => number_format(($temp - 32) * (5/9), 2)
+            'F' => number_format($json['last-recorded'], 2),
+            'C' => number_format(($json['last-recorded'] - 32) * (5/9), 2)
         ];
     }
 
@@ -24,7 +24,10 @@ class ApiController extends Controller
      * @param $temp: Int in fahrenheit
      */
     public function setLastRecorded($temp) {
-        Config::set('team-projects.last-recorded', $temp);
+        $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
+        $json['last-recorded'] = $temp;
+
+        file_put_contents(public_path() . '/config.json', json_encode($json));
     }
 
     /**
@@ -63,8 +66,9 @@ class ApiController extends Controller
      */
     public function getSwitch()
     {
+        $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
         return [
-            'switch' => config('team-projects.switch')
+            'switch' => $json['switch']
         ];
     }
 
@@ -76,7 +80,8 @@ class ApiController extends Controller
     public function setSwitch($switch_to)
     {
         $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
-        $json[0]['switch'] = $switch_to;
-        file_put_contents(public_path() . '/config.json', $json);
+        $json['switch'] = $switch_to;
+
+        file_put_contents(public_path() . '/config.json', json_encode($json));
     }
 }
