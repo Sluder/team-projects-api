@@ -75,8 +75,8 @@ class ApiController extends Controller
      */
     public function setSwitch($switch_to)
     {
-        $json = json_decode(file_get_contents(base_path() . 'config.json'), true);
+        $json = json_decode(file_get_contents(base_path() . '/config.json'), true);
         $json['switch'] = $switch_to;
-        file_put_contents(base_path() . 'config.json', json_encode($json));
+        file_put_contents(base_path() . '/config.json', json_encode($json));
     }
 }
