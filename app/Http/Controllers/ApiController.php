@@ -37,7 +37,7 @@ class ApiController extends Controller
     public function getRanges()
     {
         $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
-
+        $ranges = $json["ranges"];
         return [
             'low' => [
                 'from' => explode('-', $ranges[0])[0],
