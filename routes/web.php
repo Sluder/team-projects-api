@@ -3,7 +3,7 @@
 Route::group(['prefix' => 'api'], function() {
     Route::group(['prefix' => 'temperature'], function() {
         Route::get('/ranges', 'ApiController@getRanges');
-        //    Route::post('/ranges', '');
+        Route::post('/ranges', 'ApiController@setRanges');
 
         Route::get('/', 'ApiController@getLastRecorded');
         Route::post('/{temp}', 'ApiController@setLastRecorded');

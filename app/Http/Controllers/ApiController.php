@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
 class ApiController extends Controller
@@ -56,9 +57,14 @@ class ApiController extends Controller
     /**
      * Set temperature ranges
      */
-    public function setRanges()
+    public function setRanges(Request $request)
     {
+        $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
+        $json['ranges']["0"] = $request['low'];
+        $json['ranges']["1"] = $request['medium'];
+        $json['ranges']["2"] = $request['high'];
 
+        file_put_contents(public_path() . '/config.json', json_encode($json));
     }
 
     /**
