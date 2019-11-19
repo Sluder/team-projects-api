@@ -36,20 +36,20 @@ class ApiController extends Controller
      */
     public function getRanges()
     {
-        $ranges = config('team-projects.ranges');
+        $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
 
         return [
             'low' => [
-                'from' => explode('-', $ranges[0])[0],
-                'to' => explode('-', $ranges[0])[1]
+                'from' => explode('-', $ranges["0"])[0],
+                'to' => explode('-', $ranges["0"])[1]
             ],
             'medium' => [
-                'from' => explode('-', $ranges[1])[0],
-                'to' => explode('-', $ranges[1])[1]
+                'from' => explode('-', $ranges["1"])[0],
+                'to' => explode('-', $ranges["1"])[1]
             ],
             'high' => [
-                'from' => explode('-', $ranges[2])[0],
-                'to' => explode('-', $ranges[2])[1]
+                'from' => explode('-', $ranges["2"])[0],
+                'to' => explode('-', $ranges["2"])[1]
             ]
         ];
     }
