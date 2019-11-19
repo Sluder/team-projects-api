@@ -40,16 +40,16 @@ class ApiController extends Controller
 
         return [
             'low' => [
-                'from' => explode('-', $ranges["0"])[0],
-                'to' => explode('-', $ranges["0"])[1]
+                'from' => explode('-', $ranges[0])[0],
+                'to' => explode('-', $ranges[0])[1]
             ],
             'medium' => [
-                'from' => explode('-', $ranges["1"])[0],
-                'to' => explode('-', $ranges["1"])[1]
+                'from' => explode('-', $ranges[1])[0],
+                'to' => explode('-', $ranges[1])[1]
             ],
             'high' => [
-                'from' => explode('-', $ranges["2"])[0],
-                'to' => explode('-', $ranges["2"])[1]
+                'from' => explode('-', $ranges[2])[0],
+                'to' => explode('-', $ranges[2])[1]
             ]
         ];
     }
@@ -60,9 +60,9 @@ class ApiController extends Controller
     public function setRanges(Request $request)
     {
         $json = json_decode(file_get_contents(public_path() . '/config.json'), true);
-        $json['ranges']["0"] = $request['low'];
-        $json['ranges']["1"] = $request['medium'];
-        $json['ranges']["2"] = $request['high'];
+        $json['ranges'][0] = $request['low'];
+        $json['ranges'][1] = $request['medium'];
+        $json['ranges'][2] = $request['high'];
 
         file_put_contents(public_path() . '/config.json', json_encode($json));
     }
