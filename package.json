@@ -6,7 +6,7 @@
         "setup" : "cp .env.example .env; sudo npm i --no-bin-links; composer install; php artisan key:generate; npm run dev"
     },
     "devDependencies": {
-        "axios": "^0.18",
+        "axios": "^0.21",
         "bootstrap": "^4.0.0",
         "popper.js": "^1.12",
         "cross-env": "^5.1",
